@@ -2,10 +2,12 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
-
-import './App.css';
-import 'remixicon/fonts/remixicon.css';
 import AddPopUp from './Components/AddPopUp';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'remixicon/fonts/remixicon.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 const notes = JSON.parse(window.localStorage.getItem('notes')) || [];
 class App extends React.Component {
@@ -35,7 +37,7 @@ class App extends React.Component {
 
   storeToLocalStorage = () => {
     window.localStorage.setItem('notes', JSON.stringify(this.state.notes));
-    console.log('stored');
+    toast.success("Note added successfully!");
   }
 
   addNote = (e) => {
@@ -83,6 +85,8 @@ class App extends React.Component {
     const { showAddPopUp, Title, Description, TitleError, DescriptionError } = this.state;
     console.log(this.state);
     return (
+      <>
+        <ToastContainer />
       <div className='container'>
         {showAddPopUp ? (
           <AddPopUp
@@ -109,6 +113,7 @@ class App extends React.Component {
           </Switch>
         </BrowserRouter>
       </div>
+      </>
     );
   }
 }
