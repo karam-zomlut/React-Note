@@ -5,12 +5,14 @@ import NotFound from './Pages/NotFound';
 
 import './App.css';
 import 'remixicon/fonts/remixicon.css';
+import AddPopUp from './Components/AddPopUp';
 
 class App extends React.Component {
-  
+
   render() {
     return (
       <div className="container">
+        <AddPopUp />
         <BrowserRouter>
           <Switch>
             <Route path='/notfound' component={NotFound} />
