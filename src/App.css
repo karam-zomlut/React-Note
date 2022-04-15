@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 button, .btn,
@@ -23,3 +25,13 @@ input, button, select, textarea {
   padding: .7rem 1rem;
 }
 
+body{
+  background-color: #88ABFF;
+}
+
+.container{
+  margin: 4rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,265px);
+  gap: 1rem;
+}

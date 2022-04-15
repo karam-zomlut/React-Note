@@ -1,11 +1,26 @@
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Home from './Pages/Home';
+import NotFound from './Pages/NotFound';
 
-function App() {
-  return (
-    <div className="container">
-      <h1>Note App</h1>
-    </div>
-  );
+import './App.css';
+import 'remixicon/fonts/remixicon.css';
+
+class App extends React.Component {
+  
+  render() {
+    return (
+      <div className="container">
+        <BrowserRouter>
+          <Switch>
+            <Route path='/notfound' component={NotFound} />
+            <Route exact path="/" component={Home} />
+            <Redirect to='/notfound' />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
