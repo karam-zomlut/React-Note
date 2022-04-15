@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const AddPopUp = ({Title, Description, toggleAddPopup, handleChange}) => {
+const AddPopUp = ({Title, Description, TitleError, DescriptionError, toggleAddPopup, handleChange, addNote}) => {
   return (
     <div className='popup-container'>
       <div className='popup'>
@@ -18,7 +18,7 @@ const AddPopUp = ({Title, Description, toggleAddPopup, handleChange}) => {
                 Title
               </label>
               <input
-                className='input'
+                className={`input ${TitleError ? 'error' : ''}`}
                 type='text'
                 id='title'
                 name='Title'
@@ -26,20 +26,23 @@ const AddPopUp = ({Title, Description, toggleAddPopup, handleChange}) => {
                 onChange={(e) => handleChange(e)}
                 value={Title}
               />
+              {TitleError && ( <span className='error'>{TitleError}</span> )}
             </div>
             <div className='row description'>
               <label className='label' htmlFor='description'>
                 Description
               </label>
               <textarea
-                className='input'
+                className={`input ${DescriptionError ? 'error' : ''}`}
                 id='description'
                 name='Description'
                 onChange={(e) => handleChange(e)}
                 value={Description}
-                rows='3'></textarea>
+                rows='3'>
+                </textarea>
+                {DescriptionError && ( <span className='error'>{DescriptionError}</span> )}
             </div>
-            <button className='btn save-btn'>Add Note</button>
+            <button className='btn save-btn' onClick={(e) => addNote(e)}>Add Note</button>
           </form>
         </div>
       </div>

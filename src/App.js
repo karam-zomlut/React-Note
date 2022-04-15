@@ -7,6 +7,7 @@ import './App.css';
 import 'remixicon/fonts/remixicon.css';
 import AddPopUp from './Components/AddPopUp';
 
+const notes = JSON.parse(window.localStorage.getItem('notes')) || [];
 class App extends React.Component {
   state = {
     showAddPopUp: false,
@@ -14,6 +15,9 @@ class App extends React.Component {
     EditId: null,
     Title: '',
     Description: '',
+    TitleError: '',
+    DescriptionError: '',
+    notes: notes,
   };
 
   toggleAddPopup = (e) => {
@@ -29,14 +33,54 @@ class App extends React.Component {
     }
   };
 
+  storeToLocalStorage = () => {
+    window.localStorage.setItem('notes', JSON.stringify(this.state.notes));
+    console.log('stored');
+  }
+
+  addNote = (e) => {
+    e.preventDefault();
+    const { Title, Description, notes } = this.state;
+    if (Title === '') {
+      this.setState({
+        TitleError: 'Title is required',
+      });
+    } 
+    if (Description === '') {
+      this.setState({
+        DescriptionError: 'Description is required',
+      });
+    }
+    if(Title !== '' && Description !== ''){
+      const newNote = {
+        id: Date.now(),
+        Title,
+        Description,
+      };
+      this.setState({
+        notes: [...notes, newNote],
+        showAddPopUp: false,
+        Title: '',
+        Description: '',
+        TitleError: '',
+        DescriptionError: '',
+      }, () => this.storeToLocalStorage());
+    }
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
+    if(e.target.value !== ''){
+      this.setState({
+        [e.target.name + 'Error']: '',
+      });
+    }
   };
 
   render() {
-    const { showAddPopUp, Title, Description } = this.state;
+    const { showAddPopUp, Title, Description, TitleError, DescriptionError } = this.state;
     console.log(this.state);
     return (
       <div className='container'>
@@ -44,8 +88,11 @@ class App extends React.Component {
           <AddPopUp
             Title={Title}
             Description={Description}
+            TitleError={TitleError}
+            DescriptionError={DescriptionError}
             toggleAddPopup={this.toggleAddPopup}
             handleChange={this.handleChange}
+            addNote={this.addNote}
           />
         ) : null}
         <BrowserRouter>

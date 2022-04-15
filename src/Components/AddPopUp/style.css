@@ -70,6 +70,17 @@
   border-radius: .2rem;
 }
 
+.content .form input.error,
+.content .form textarea.error{
+  border: 2px solid #ff6d6d;
+  margin-bottom: .1rem;
+}
+
+span.error{
+  color: #ff1e1e;
+  font-size: .9rem;
+}
+
 .content .form textarea{
   height: 130px;
   resize: none;
