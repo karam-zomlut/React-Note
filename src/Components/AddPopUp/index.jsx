@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const AddPopUp = ({toggleAddPopup}) => {
+const AddPopUp = ({Title, Description, toggleAddPopup, handleChange}) => {
   return (
     <div className='popup-container'>
       <div className='popup'>
@@ -21,8 +21,10 @@ const AddPopUp = ({toggleAddPopup}) => {
                 className='input'
                 type='text'
                 id='title'
-                name='title'
+                name='Title'
                 autoFocus
+                onChange={(e) => handleChange(e)}
+                value={Title}
               />
             </div>
             <div className='row description'>
@@ -32,11 +34,12 @@ const AddPopUp = ({toggleAddPopup}) => {
               <textarea
                 className='input'
                 id='description'
-                name='description'
-                rows='3'
-              ></textarea>
+                name='Description'
+                onChange={(e) => handleChange(e)}
+                value={Description}
+                rows='3'></textarea>
             </div>
-            <button className="btn save-btn">Add Note</button>
+            <button className='btn save-btn'>Add Note</button>
           </form>
         </div>
       </div>
