@@ -38,9 +38,9 @@ class App extends React.Component {
     }
   };
 
-  storeToLocalStorage = () => {
+  storeToLocalStorage = ({msg}) => {
     window.localStorage.setItem('notes', JSON.stringify(this.state.notes));
-    toast.success("Note added successfully!");
+    toast.success(msg);
   }
 
   addNote = (e) => {
@@ -69,7 +69,7 @@ class App extends React.Component {
         Description: '',
         TitleError: '',
         DescriptionError: '',
-      }, () => this.storeToLocalStorage());
+      }, () => this.storeToLocalStorage({msg: 'Note added successfully!'}));
     }
   }
 
@@ -102,7 +102,7 @@ class App extends React.Component {
     if(Title !== '' && Description !== ''){
       note[0].Title = Title;
       note[0].Description = Description;
-      this.storeToLocalStorage();
+      this.storeToLocalStorage({msg: 'Note updated successfully!'});
       this.toggleAddPopup(e);
     }
   }
