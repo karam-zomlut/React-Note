@@ -1,18 +1,14 @@
 import React from 'react';
 import './style.css';
 
-const AddPopUp = () => {
-  const activeStyle = {
-    opacity: 1,
-    visibility: 'visible',
-  }
+const AddPopUp = ({toggleAddPopup}) => {
   return (
-    <div className='popup-container' style={activeStyle}>
+    <div className='popup-container'>
       <div className='popup'>
         <div className='content'>
           <header className='popup-header'>
             <h2 className='title'>Add a new note</h2>
-            <button className='btn close'>
+            <button className='btn close' onClick={(e) => toggleAddPopup(e)}>
               <i className='ri-close-line'></i>
             </button>
           </header>

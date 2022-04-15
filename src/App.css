@@ -27,6 +27,10 @@ input, button, select, textarea {
   outline: none;
 }
 
+i{
+  pointer-events: none;
+}
+
 body{
   background-color: #88ABFF;
 }
