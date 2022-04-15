@@ -82,7 +82,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showAddPopUp, Title, Description, TitleError, DescriptionError } = this.state;
+    const { showAddPopUp, Title, Description, TitleError, DescriptionError, notes } = this.state;
     console.log(this.state);
     return (
       <>
@@ -106,7 +106,7 @@ class App extends React.Component {
               exact
               path='/'
               render={(props) => (
-                <Home {...props} toggleAddPopup={this.toggleAddPopup} />
+                <Home {...props} notes={notes} toggleAddPopup={this.toggleAddPopup} />
               )}
             />
             <Redirect to='/notfound' />

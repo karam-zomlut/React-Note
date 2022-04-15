@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const SettingMenu = () => {
+const SettingMenu = ({id}) => {
   return (
     <ul className='setting-menu'>
       <li>
