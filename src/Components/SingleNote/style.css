@@ -1,0 +1,45 @@
+.single-note{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 250px;
+  background-color: #FFF;
+  border-radius: .4rem;
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.single-note .title{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.single-note .description{
+  font-size: 1rem;
+  font-weight: 400;
+  color: #575757;
+  margin-top: 0.3rem;
+}
+
+.single-note .bottom-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: .4rem;
+  padding-top: .5rem;
+  border-top: 1px solid #CCC;
+}
+
+.bottom-content .more{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: .3rem .1rem .3rem .7rem;
+}
+
+.bottom-content i{
+  font-size: 1.3rem;
+  color: #6d6d6d;
+  margin-top: .2rem;
+  display: inline-block;
+  cursor: pointer;
+}
