@@ -2,7 +2,7 @@ import React from 'react';
 import SettingMenu from '../SettingMenu';
 import './style.css';
 
-const SingleNote = ({ note: { id, Title, Description } }) => {
+const SingleNote = ({ note: { id, Title, Description }, showEditPopup }) => {
   return (
     <div className='single-note'>
       <div className='details'>
@@ -15,7 +15,7 @@ const SingleNote = ({ note: { id, Title, Description } }) => {
           <button className='btn more'>
             <i className='ri-more-fill'></i>
           </button>
-          <SettingMenu id={id} />
+          <SettingMenu id={id} showEditPopup={showEditPopup} />
         </div>
       </div>
     </div>

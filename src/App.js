@@ -23,14 +23,17 @@ class App extends React.Component {
   };
 
   toggleAddPopup = (e) => {
+    const {EditMode} = this.state;
     e.preventDefault();
     this.setState({
       showAddPopUp: !this.state.showAddPopUp,
     });
-    if (e.target.className.includes('save-btn')){
+    if (EditMode){
       this.setState({
         Title: '',
         Description: '',
+        EditMode: false,
+        EditId: null,
       });
     }
   };
@@ -70,6 +73,40 @@ class App extends React.Component {
     }
   }
 
+  showEditPopup = (id) => {
+    const { notes } = this.state;
+    const note = notes.filter((note) => note.id === id);
+    this.setState({
+      EditMode: true,
+      EditId: id,
+      Title: note[0].Title,
+      Description: note[0].Description,
+      showAddPopUp: true,
+    });
+  }
+
+  editNote = (e, id) => {
+    e.preventDefault();
+    const { Title, Description, notes } = this.state;
+    const note = notes.filter((note) => note.id === id);
+    if (Title === '') {
+      this.setState({
+        TitleError: 'Title is required',
+      });
+    }
+    if (Description === '') {
+      this.setState({
+        DescriptionError: 'Description is required',
+      });
+    }
+    if(Title !== '' && Description !== ''){
+      note[0].Title = Title;
+      note[0].Description = Description;
+      this.storeToLocalStorage();
+      this.toggleAddPopup(e);
+    }
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -82,37 +119,45 @@ class App extends React.Component {
   };
 
   render() {
-    const { showAddPopUp, Title, Description, TitleError, DescriptionError, notes } = this.state;
+    const { showAddPopUp, Title, Description, TitleError, DescriptionError, notes, EditMode, EditId } = this.state;
     console.log(this.state);
     return (
       <>
         <ToastContainer />
-      <div className='container'>
-        {showAddPopUp ? (
-          <AddPopUp
-            Title={Title}
-            Description={Description}
-            TitleError={TitleError}
-            DescriptionError={DescriptionError}
-            toggleAddPopup={this.toggleAddPopup}
-            handleChange={this.handleChange}
-            addNote={this.addNote}
-          />
-        ) : null}
-        <BrowserRouter>
-          <Switch>
-            <Route path='/notfound' component={NotFound} />
-            <Route
-              exact
-              path='/'
-              render={(props) => (
-                <Home {...props} notes={notes} toggleAddPopup={this.toggleAddPopup} />
-              )}
+        <div className='container'>
+          {showAddPopUp ? (
+            <AddPopUp
+              Title={Title}
+              Description={Description}
+              TitleError={TitleError}
+              DescriptionError={DescriptionError}
+              EditId={EditId}
+              EditMode={EditMode}
+              toggleAddPopup={this.toggleAddPopup}
+              handleChange={this.handleChange}
+              addNote={this.addNote}
+              editNote={this.editNote}
             />
-            <Redirect to='/notfound' />
-          </Switch>
-        </BrowserRouter>
-      </div>
+          ) : null}
+          <BrowserRouter>
+            <Switch>
+              <Route path='/notfound' component={NotFound} />
+              <Route
+                exact
+                path='/'
+                render={(props) => (
+                  <Home
+                    {...props}
+                    notes={notes}
+                    toggleAddPopup={this.toggleAddPopup}
+                    showEditPopup={this.showEditPopup}
+                  />
+                )}
+              />
+              <Redirect to='/notfound' />
+            </Switch>
+          </BrowserRouter>
+        </div>
       </>
     );
   }

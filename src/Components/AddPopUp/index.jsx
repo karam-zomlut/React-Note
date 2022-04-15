@@ -1,13 +1,26 @@
 import React from 'react';
 import './style.css';
 
-const AddPopUp = ({Title, Description, TitleError, DescriptionError, toggleAddPopup, handleChange, addNote}) => {
+const AddPopUp = ({
+  Title,
+  Description,
+  TitleError,
+  DescriptionError,
+  toggleAddPopup,
+  handleChange,
+  addNote,
+  EditId,
+  EditMode,
+  editNote
+}) => {
   return (
     <div className='popup-container'>
       <div className='popup'>
         <div className='content'>
           <header className='popup-header'>
-            <h2 className='title'>Add a new note</h2>
+            <h2 className='title'>
+              {EditMode ? 'Update Note' : 'Add a new note'}
+            </h2>
             <button className='btn close' onClick={(e) => toggleAddPopup(e)}>
               <i className='ri-close-line'></i>
             </button>
@@ -26,7 +39,7 @@ const AddPopUp = ({Title, Description, TitleError, DescriptionError, toggleAddPo
                 onChange={(e) => handleChange(e)}
                 value={Title}
               />
-              {TitleError && ( <span className='error'>{TitleError}</span> )}
+              {TitleError && <span className='error'>{TitleError}</span>}
             </div>
             <div className='row description'>
               <label className='label' htmlFor='description'>
@@ -38,11 +51,20 @@ const AddPopUp = ({Title, Description, TitleError, DescriptionError, toggleAddPo
                 name='Description'
                 onChange={(e) => handleChange(e)}
                 value={Description}
-                rows='3'>
-                </textarea>
-                {DescriptionError && ( <span className='error'>{DescriptionError}</span> )}
+                rows='3'></textarea>
+              {DescriptionError && (
+                <span className='error'>{DescriptionError}</span>
+              )}
             </div>
-            <button className='btn save-btn' onClick={(e) => addNote(e)}>Add Note</button>
+            {EditMode ? (
+              <button className='btn save-btn' onClick={(e) => editNote(e, EditId)}>
+                Update
+              </button>
+            ) : (
+              <button className='btn save-btn' onClick={(e) => addNote(e)}>
+                Add Note
+              </button>
+            )}
           </form>
         </div>
       </div>

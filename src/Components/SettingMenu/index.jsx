@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
 
-const SettingMenu = ({id}) => {
+const SettingMenu = ({id, showEditPopup}) => {
   return (
     <ul className='setting-menu'>
       <li>
-        <button className='btn edit-btn'>
+        <button className='btn edit-btn' onClick={() => showEditPopup(id)}>
           <i className='ri-pencil-line'></i>
           Edit
         </button>
