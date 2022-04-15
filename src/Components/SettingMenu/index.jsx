@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const SettingMenu = ({id, showEditPopup}) => {
+const SettingMenu = ({id, showEditPopup, deleteNote}) => {
   return (
     <ul className='setting-menu'>
       <li>
@@ -11,7 +11,7 @@ const SettingMenu = ({id, showEditPopup}) => {
         </button>
       </li>
       <li>
-        <button className='btn del-btn'>
+        <button className='btn del-btn' onClick={() => deleteNote(id)}>
           <i className='ri-delete-bin-line'></i>
           Delete
         </button>

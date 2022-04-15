@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
 import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
 import AddPopUp from './Components/AddPopUp';
-import { ToastContainer, toast } from 'react-toastify';
 
 import 'remixicon/fonts/remixicon.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,12 +25,12 @@ class App extends React.Component {
   };
 
   toggleAddPopup = (e) => {
-    const {EditMode} = this.state;
+    const { EditMode } = this.state;
     e.preventDefault();
     this.setState({
       showAddPopUp: !this.state.showAddPopUp,
     });
-    if (EditMode){
+    if (EditMode) {
       this.setState({
         Title: '',
         Description: '',
@@ -38,10 +40,10 @@ class App extends React.Component {
     }
   };
 
-  storeToLocalStorage = ({msg}) => {
+  storeToLocalStorage = ({ msg }) => {
     window.localStorage.setItem('notes', JSON.stringify(this.state.notes));
     toast.success(msg);
-  }
+  };
 
   addNote = (e) => {
     e.preventDefault();
@@ -50,28 +52,31 @@ class App extends React.Component {
       this.setState({
         TitleError: 'Title is required',
       });
-    } 
+    }
     if (Description === '') {
       this.setState({
         DescriptionError: 'Description is required',
       });
     }
-    if(Title !== '' && Description !== ''){
+    if (Title !== '' && Description !== '') {
       const newNote = {
         id: Date.now(),
         Title,
         Description,
       };
-      this.setState({
-        notes: [...notes, newNote],
-        showAddPopUp: false,
-        Title: '',
-        Description: '',
-        TitleError: '',
-        DescriptionError: '',
-      }, () => this.storeToLocalStorage({msg: 'Note added successfully!'}));
+      this.setState(
+        {
+          notes: [...notes, newNote],
+          showAddPopUp: false,
+          Title: '',
+          Description: '',
+          TitleError: '',
+          DescriptionError: '',
+        },
+        () => this.storeToLocalStorage({ msg: 'Note added successfully!' })
+      );
     }
-  }
+  };
 
   showEditPopup = (id) => {
     const { notes } = this.state;
@@ -83,7 +88,7 @@ class App extends React.Component {
       Description: note[0].Description,
       showAddPopUp: true,
     });
-  }
+  };
 
   editNote = (e, id) => {
     e.preventDefault();
@@ -99,19 +104,38 @@ class App extends React.Component {
         DescriptionError: 'Description is required',
       });
     }
-    if(Title !== '' && Description !== ''){
+    if (Title !== '' && Description !== '') {
       note[0].Title = Title;
       note[0].Description = Description;
-      this.storeToLocalStorage({msg: 'Note updated successfully!'});
+      this.storeToLocalStorage({ msg: 'Note updated successfully!' });
       this.toggleAddPopup(e);
     }
-  }
+  };
+
+  deleteNote = (id) => {
+    const { notes } = this.state;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You are going to delete note!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedNotes = notes.filter((note) => note.id !== id);
+        this.setState({
+          notes: updatedNotes,
+        }, () => this.storeToLocalStorage({ msg: 'Note deleted successfully!' }));
+      }
+    });
+  };
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    if(e.target.value !== ''){
+    if (e.target.value !== '') {
       this.setState({
         [e.target.name + 'Error']: '',
       });
@@ -119,7 +143,16 @@ class App extends React.Component {
   };
 
   render() {
-    const { showAddPopUp, Title, Description, TitleError, DescriptionError, notes, EditMode, EditId } = this.state;
+    const {
+      showAddPopUp,
+      Title,
+      Description,
+      TitleError,
+      DescriptionError,
+      notes,
+      EditMode,
+      EditId,
+    } = this.state;
     console.log(this.state);
     return (
       <>
@@ -151,6 +184,7 @@ class App extends React.Component {
                     notes={notes}
                     toggleAddPopup={this.toggleAddPopup}
                     showEditPopup={this.showEditPopup}
+                    deleteNote={this.deleteNote}
                   />
                 )}
               />
