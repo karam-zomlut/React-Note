@@ -9,7 +9,7 @@
   padding: .4rem 0;
   min-width: 120px;
   transform: scale(0);
-  transiform-origin: bottom right;
+  transform-origin: bottom right;
   transition: all .3s ease-in-out;
 }
 
