@@ -59,10 +59,28 @@ class App extends React.Component {
       });
     }
     if (Title !== '' && Description !== '') {
+      const date = new Date();
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
       const newNote = {
         id: Date.now(),
         Title,
         Description,
+        Date: `${
+          months[date.getMonth()]
+        } ${date.getDate()}, ${date.getFullYear()}`,
       };
       this.setState(
         {

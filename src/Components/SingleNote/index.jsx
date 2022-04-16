@@ -2,7 +2,7 @@ import React from 'react';
 import SettingMenu from '../SettingMenu';
 import './style.css';
 
-const SingleNote = ({ note: { id, Title, Description }, showEditPopup, deleteNote }) => {
+const SingleNote = ({ note: { id, Title, Description, Date}, showEditPopup, deleteNote }) => {
   return (
     <div className='single-note'>
       <div className='details'>
@@ -10,7 +10,7 @@ const SingleNote = ({ note: { id, Title, Description }, showEditPopup, deleteNot
         <p className='description'>{Description}</p>
       </div>
       <div className='bottom-content'>
-        <span className='date'>April 3, 2022</span>
+        <span className='date'>{Date}</span>
         <div className='actions'>
           <button className='btn more'>
             <i className='ri-more-fill'></i>
