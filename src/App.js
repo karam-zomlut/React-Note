@@ -153,7 +153,6 @@ class App extends React.Component {
       EditMode,
       EditId,
     } = this.state;
-    console.log(this.state);
     return (
       <>
         <ToastContainer />
