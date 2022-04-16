@@ -1,0 +1,30 @@
+.add-box{
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #FFF;
+  border-radius: .4rem;
+  padding: 1rem 1.2rem 1.2rem;
+  cursor: pointer;
+}
+
+.add-box .icon{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 2px dashed #88ABFF;
+  color: #88ABFF;
+  font-size: 2.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-box .box-title{
+  color: #88ABFF;
+  font-weight: 500;
+  margin-top: 1.2rem;
+  font-size: 1rem;
+}

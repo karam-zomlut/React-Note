@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+button, .btn,
+input[type=button],
+input[type=submit] {
+  border: none;
+  border-radius: 0;
+  background-color: #FFF;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+}
+
+input, button, select, textarea {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 0;
+  outline: none;
+}
+
+i{
+  pointer-events: none;
+}
+
+body{
+  background-color: #88ABFF;
+}
+
+.container{
+  margin: 4rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,265px);
+  gap: 1rem;
+}
+
+.Toastify{
+  padding: 1rem;
+}
+
+
+@media (max-width: 660px){
+  .container{
+    grid-template-columns: repeat(auto-fill,100%);
+    margin: 2rem 1rem;
+  }
+}
+
+@media (max-width: 660px){
+  .Toastify__toast-container{
+    left: unset;
+    top: 1em;
+    right: 1em;
+    width: calc(100% - 2rem);
+  }
+  .Toastify__toast{
+    border-radius: .3rem;
+  }
+}
